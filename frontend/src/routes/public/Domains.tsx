@@ -3,17 +3,17 @@ import { motion } from 'framer-motion';
 import { 
   FiSearch, 
   FiGlobe, 
-  FiCheckCircle, 
+  // FiCheckCircle, 
   FiArrowRight,
   FiShield,
-  FiClock,
-  FiUsers,
-  FiAward,
+  // FiClock,
+  // FiUsers,
+  // FiAward,
   FiLock,
   FiRefreshCw,
   FiDollarSign,
-  FiStar,
-  FiTrendingUp
+  // FiStar,
+  // FiTrendingUp
 } from 'react-icons/fi';
 import { useState } from 'react';
 

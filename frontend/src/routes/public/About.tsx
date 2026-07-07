@@ -23,7 +23,7 @@ import {
 import { useRef } from 'react';
 
 export const About = () => {
-  const targetRef = useRef<HTMLDivElement>(null);
+  // const targetRef = useRef<HTMLDivElement>(null);
 
   const values = [
     {
@@ -52,36 +52,36 @@ export const About = () => {
     }
   ];
 
-  const team = [
-    {
-      name: 'Michael Kiprop',
-      role: 'CEO & Founder',
-      image: 'https://ui-avatars.com/api/?name=Michael+Kiprop&background=1a237e&color=fff&size=128',
-      bio: 'Visionary leader with 15+ years in tech',
-      social: { twitter: '#', linkedin: '#' }
-    },
-    {
-      name: 'Sarah Wanjiku',
-      role: 'CTO',
-      image: 'https://ui-avatars.com/api/?name=Sarah+Wanjiku&background=0d47a1&color=fff&size=128',
-      bio: 'Full-stack architect & cloud expert',
-      social: { twitter: '#', linkedin: '#' }
-    },
-    {
-      name: 'David Ochieng',
-      role: 'Lead Developer',
-      image: 'https://ui-avatars.com/api/?name=David+Ochieng&background=00bcd4&color=fff&size=128',
-      bio: 'Senior full-stack developer',
-      social: { twitter: '#', linkedin: '#' }
-    },
-    {
-      name: 'Grace Akinyi',
-      role: 'UI/UX Designer',
-      image: 'https://ui-avatars.com/api/?name=Grace+Akinyi&background=1a237e&color=fff&size=128',
-      bio: 'Creative designer with 8+ years experience',
-      social: { twitter: '#', linkedin: '#' }
-    }
-  ];
+  // const team = [
+  //   {
+  //     name: 'Michael Kiprop',
+  //     role: 'CEO & Founder',
+  //     image: 'https://ui-avatars.com/api/?name=Michael+Kiprop&background=1a237e&color=fff&size=128',
+  //     bio: 'Visionary leader with 15+ years in tech',
+  //     social: { twitter: '#', linkedin: '#' }
+  //   },
+  //   {
+  //     name: 'Sarah Wanjiku',
+  //     role: 'CTO',
+  //     image: 'https://ui-avatars.com/api/?name=Sarah+Wanjiku&background=0d47a1&color=fff&size=128',
+  //     bio: 'Full-stack architect & cloud expert',
+  //     social: { twitter: '#', linkedin: '#' }
+  //   },
+  //   {
+  //     name: 'David Ochieng',
+  //     role: 'Lead Developer',
+  //     image: 'https://ui-avatars.com/api/?name=David+Ochieng&background=00bcd4&color=fff&size=128',
+  //     bio: 'Senior full-stack developer',
+  //     social: { twitter: '#', linkedin: '#' }
+  //   },
+  //   {
+  //     name: 'Grace Akinyi',
+  //     role: 'UI/UX Designer',
+  //     image: 'https://ui-avatars.com/api/?name=Grace+Akinyi&background=1a237e&color=fff&size=128',
+  //     bio: 'Creative designer with 8+ years experience',
+  //     social: { twitter: '#', linkedin: '#' }
+  //   }
+  // ];
 
   const milestones = [
     { year: '2020', title: 'Founded', description: 'EvolTechs was born with a vision to transform digital solutions' },

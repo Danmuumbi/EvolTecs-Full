@@ -8,7 +8,7 @@ import {
   FiClock,
   FiMessageSquare,
   FiUser,
-  FiGlobe,
+  // FiGlobe,
   FiArrowRight,
   FiCheckCircle,
   FiTwitter,

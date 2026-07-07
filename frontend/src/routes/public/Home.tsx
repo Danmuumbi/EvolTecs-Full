@@ -10,14 +10,14 @@ import {
   FiCloud,
   FiSmartphone,
   FiDatabase,
-  FiUsers,
-  FiAward,
-  FiClock,
+  // FiUsers,
+  // FiAward,
+  // FiClock,
   FiCheckCircle,
   FiPlay,
   FiSearch,
-  FiCpu,
-  FiLayers
+  // FiCpu,
+  // FiLayers
 } from 'react-icons/fi';
 import { 
   SiReact, 
@@ -35,7 +35,7 @@ import {
   SiFirebase,
   SiKubernetes,
   SiRedis,
-  SiTensorflow,
+  // SiTensorflow,
   SiSpring
 } from 'react-icons/si';
 import { useRef, useState } from 'react';
