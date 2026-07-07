@@ -170,7 +170,7 @@ export const Home = () => {
           >
             <source 
               // src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
-                src="hero.mp4" 
+                src="/hero.mp4" 
               type="video/mp4" 
             />
           </video>
@@ -186,9 +186,9 @@ export const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            <div className="inline-block px-4 py-2 glass-effect rounded-full mb-6">
-              <span className="text-sm font-medium gradient-text">✨ Trusted by 500+ Businesses</span>
-            </div>
+            {/* <div className="inline-block px-4 py-2 glass-effect rounded-full mb-6">
+              <span className="text-sm font-medium gradient-text"> Trusted by 500+ Businesses</span>
+            </div> */}
             
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
               <span className="text-white">Transform Your</span>
