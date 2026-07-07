@@ -14,7 +14,8 @@ export const AdminLayout = () => {
     );
   }
 
-  if (!user || user.role !== 'ADMIN') {
+  // Fixed: Use lowercase role comparison
+  if (!user || user.role !== 'admin') {
     return <Navigate to="/" />;
   }
 

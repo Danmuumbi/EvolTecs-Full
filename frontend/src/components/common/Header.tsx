@@ -15,9 +15,9 @@ import {
   FiGlobe,
   FiCode,
   FiMail,
-  FiInfo,
+  // FiInfo,
   FiPhone,
-  FiSearch
+  // FiSearch
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 

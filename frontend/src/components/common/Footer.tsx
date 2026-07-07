@@ -2,8 +2,8 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { 
   FiMail, 
-  FiPhone, 
-  FiMapPin, 
+  // FiPhone, 
+  // FiMapPin, 
   FiTwitter, 
   FiLinkedin, 
   FiGithub, 

@@ -15,7 +15,8 @@ export const ClientLayout = () => {
     );
   }
 
-  if (!user || (user.role !== 'CUSTOMER' && user.role !== 'ADMIN')) {
+  // Fixed: Use lowercase role comparisons
+  if (!user || (user.role !== 'customer' && user.role !== 'admin')) {
     return <Navigate to="/login" />;
   }
 
