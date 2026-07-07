@@ -24,18 +24,18 @@ export const Domains = () => {
   const [showResults, setShowResults] = useState(false);
 
   const popularTLDs = [
-    { name: '.com', price: '$9.99', popular: true, color: 'from-blue-400 to-blue-600' },
-    { name: '.ke', price: '$12.99', popular: true, color: 'from-green-400 to-green-600' },
-    { name: '.org', price: '$8.99', popular: true, color: 'from-purple-400 to-purple-600' },
-    { name: '.net', price: '$10.99', popular: false, color: 'from-red-400 to-red-600' },
-    { name: '.tech', price: '$14.99', popular: false, color: 'from-cyan-400 to-cyan-600' },
-    { name: '.cloud', price: '$16.99', popular: false, color: 'from-indigo-400 to-indigo-600' },
-    { name: '.io', price: '$18.99', popular: false, color: 'from-pink-400 to-pink-600' },
-    { name: '.app', price: '$15.99', popular: false, color: 'from-yellow-400 to-yellow-600' },
-    { name: '.co', price: '$11.99', popular: false, color: 'from-orange-400 to-orange-600' },
-    { name: '.online', price: '$13.99', popular: false, color: 'from-teal-400 to-teal-600' },
-    { name: '.shop', price: '$17.99', popular: false, color: 'from-rose-400 to-rose-600' },
-    { name: '.dev', price: '$19.99', popular: false, color: 'from-violet-400 to-violet-600' },
+    { name: '.com', price: 'KSH 1100', popular: true, color: 'from-blue-400 to-blue-600' },
+    { name: '.ke', price: 'KSH 1200', popular: true, color: 'from-green-400 to-green-600' },
+    { name: '.org', price: 'KSH 800', popular: true, color: 'from-purple-400 to-purple-600' },
+    { name: '.net', price: 'KSH 1000', popular: false, color: 'from-red-400 to-red-600' },
+    { name: '.tech', price: 'KSH 1400', popular: false, color: 'from-cyan-400 to-cyan-600' },
+    { name: '.cloud', price: 'KSH 1600', popular: false, color: 'from-indigo-400 to-indigo-600' },
+    { name: '.io', price: 'KSH 1800', popular: false, color: 'from-pink-400 to-pink-600' },
+    { name: '.app', price: 'KSH 1500', popular: false, color: 'from-yellow-400 to-yellow-600' },
+    { name: '.co', price: 'KSH 1100', popular: false, color: 'from-orange-400 to-orange-600' },
+    { name: '.online', price: 'KSH 1300', popular: false, color: 'from-teal-400 to-teal-600' },
+    { name: '.shop', price: 'KSH 1700', popular: false, color: 'from-rose-400 to-rose-600' },
+    { name: '.dev', price: 'KSH 1900', popular: false, color: 'from-violet-400 to-violet-600' },
   ];
 
   const domainFeatures = [
@@ -84,7 +84,7 @@ export const Domains = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
-              Find Your Perfect Domain
+              COMMING SOON
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Claim Your <span className="gradient-text">Digital Identity</span>

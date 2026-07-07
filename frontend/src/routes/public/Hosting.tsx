@@ -30,7 +30,7 @@ export const Hosting = () => {
       id: 1,
       name: 'Starter',
       icon: FiBox,
-      price: { monthly: 4.99, yearly: 49.99 },
+      price: { monthly: 500, yearly: 6000 },
       description: 'Perfect for small websites and beginners',
       features: [
         '1 Website',
@@ -49,7 +49,7 @@ export const Hosting = () => {
       id: 2,
       name: 'Professional',
       icon: FiServer,
-      price: { monthly: 9.99, yearly: 99.99 },
+      price: { monthly: 900, yearly: 9000 },
       description: 'Ideal for growing businesses and professionals',
       features: [
         '10 Websites',
@@ -70,7 +70,7 @@ export const Hosting = () => {
       id: 3,
       name: 'Business',
       icon: FiCloud,
-      price: { monthly: 19.99, yearly: 199.99 },
+      price: { monthly: 1900, yearly: 19000 },
       description: 'For businesses requiring advanced features',
       features: [
         'Unlimited Websites',
@@ -93,7 +93,7 @@ export const Hosting = () => {
       id: 4,
       name: 'Enterprise',
       icon: FiCpu,
-      price: { monthly: 49.99, yearly: 499.99 },
+      price: { monthly: 4900, yearly: 49000 },
       description: 'For high-traffic websites and enterprises',
       features: [
         'Unlimited Websites',
@@ -147,7 +147,7 @@ export const Hosting = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
-              Web Hosting
+              Web Hosting : COMMING SOON
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Fast, Secure & <span className="gradient-text">Reliable</span>
@@ -161,7 +161,7 @@ export const Hosting = () => {
             <div className="inline-flex items-center gap-4 glass-effect rounded-xl p-2 backdrop-blur-xl">
               <button
                 onClick={() => setBillingCycle('monthly')}
-                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 KSH {
                   billingCycle === 'monthly'
                     ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30'
                     : 'text-gray-400 hover:text-white'
@@ -171,7 +171,7 @@ export const Hosting = () => {
               </button>
               <button
                 onClick={() => setBillingCycle('yearly')}
-                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative ${
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative KSH {
                   billingCycle === 'yearly'
                     ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30'
                     : 'text-gray-400 hover:text-white'
@@ -197,7 +197,7 @@ export const Hosting = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`glass-effect rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 border relative ${
+                className={`glass-effect rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 border relative KSH {
                   plan.popular 
                     ? 'border-accent-400/40 shadow-xl shadow-accent-400/10' 
                     : 'border-white/5 hover:border-white/10'
@@ -211,7 +211,7 @@ export const Hosting = () => {
                 )}
 
                 {/* Plan Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${plan.gradient} p-0.5 mb-4`}>
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br KSH {plan.gradient} p-0.5 mb-4`}>
                   <div className="w-full h-full bg-[#0a0a0a] rounded-xl flex items-center justify-center">
                     <plan.icon className="w-7 h-7 text-white" />
                   </div>
@@ -223,7 +223,7 @@ export const Hosting = () => {
                 {/* Price */}
                 <div className="mb-4">
                   <span className="text-3xl font-bold text-white">
-                    ${billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
+                    KSH {billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly}
                   </span>
                   <span className="text-gray-400 text-sm ml-1">
                     /{billingCycle === 'monthly' ? 'mo' : 'yr'}
@@ -234,6 +234,7 @@ export const Hosting = () => {
                     </div>
                   )}
                 </div>
+                
 
                 {/* Features */}
                 <ul className="space-y-2 mb-6">
@@ -248,7 +249,7 @@ export const Hosting = () => {
                 {/* CTA */}
                 <Link
                   to="/contact"
-                  className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                  className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 KSH {
                     plan.popular
                       ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40'
                       : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
