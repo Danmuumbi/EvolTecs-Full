@@ -7,7 +7,7 @@ import {
   FiShield,
   FiClock,
   FiUsers,
-  FiAward,
+  // FiAward,
   FiZap,
   FiDatabase,
   FiGlobe,
@@ -16,7 +16,7 @@ import {
   FiRefreshCw,
   FiTrendingUp,
   FiCpu,
-  FiHardDrive,
+  // FiHardDrive,
   FiCloud,
   FiBox
 } from 'react-icons/fi';

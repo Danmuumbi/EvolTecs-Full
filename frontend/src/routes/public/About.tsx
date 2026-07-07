@@ -4,8 +4,8 @@ import {
   FiArrowRight, 
   FiCode, 
   FiUsers, 
-  FiAward, 
-  FiGlobe,
+  // FiAward, 
+  // FiGlobe,
   FiHeart,
   FiTarget,
   FiEye,
@@ -13,14 +13,14 @@ import {
   FiZap,
   FiShield,
   FiClock,
-  FiCheckCircle,
+  // FiCheckCircle,
   FiBriefcase,
-  FiBook,
-  FiCoffee,
+  // FiBook,
+  // FiCoffee,
   FiSmile,
-  FiStar
+  // FiStar
 } from 'react-icons/fi';
-import { useRef } from 'react';
+// import { useRef } from 'react';
 
 export const About = () => {
   // const targetRef = useRef<HTMLDivElement>(null);
