@@ -274,8 +274,7 @@ export const Home = () => {
 
         {/* Description */}
         <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8 sm:mb-10 leading-relaxed">
-          We build powerful software and digital solutions that help
-          businesses launch, grow, and scale with confidence.
+          We provide the technology, infrastructure, and digital expertise businesses need to launch, grow, and scale with confidence.
         </p>
 
 
