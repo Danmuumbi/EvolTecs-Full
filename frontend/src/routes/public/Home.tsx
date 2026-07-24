@@ -231,7 +231,7 @@ export const Home = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-              <span className="text-white">Build Digital</span>
+              <span className="text-white" style={{ marginTop: 100 }}>Build Digital</span>
               <br />
               <span className="gradient-text">Scale & Thrive</span>
             </h1>
