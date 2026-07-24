@@ -12,7 +12,7 @@ import {
   FiSmartphone,
   FiDatabase,
   FiCheckCircle,
-  FiPlay,
+  // FiPlay,
   FiSearch,
   FiHeadphones,
   FiLayers,
@@ -195,97 +195,224 @@ export const Home = () => {
         canonical="https://evoltecs.com/"
       />
 
-      {/* Video Hero Section */}
-      <section ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Video Background */}
-        <div className="absolute inset-0 w-full h-full">
-          <div className="absolute inset-0 bg-gradient-to-b from-primary-900/95 via-primary-800/85 to-dark/95 z-10"></div>
-          <div className="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] opacity-20 z-10"></div>
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-transparent to-transparent z-10"></div>
-          
-          {/* Replace with your video */}
-          <video
-            autoPlay
-            loop
-            muted
-            playsInline
-            className="absolute inset-0 w-full h-full object-cover"
-            // poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920"
-            poster="https://img.magnific.com/free-vector/realistic-technology-background_52683-73672.jpg?semt=ais_hybrid&w=740&q=80"
-          >
-            <source 
-              src="/hero1.mp4" 
-              type="video/mp4" 
-            />
-          </video>
+   {/* Premium Technology Hero Section */}
+<section
+  ref={targetRef}
+  className="relative min-h-screen overflow-hidden bg-[#080b14]"
+>
+  {/* BACKGROUND IMAGE */}
+  <div className="absolute inset-0">
+
+    {/* Technology Background Image */}
+    <div
+      className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+      style={{
+        backgroundImage: "url('/assets/images/background.jpeg')"
+      }}
+    />
+
+    {/* Dark overlay to blend image with the website */}
+    <div className="absolute inset-0 bg-[#080b14]/75" />
+
+    {/* Soft blue/cyan atmospheric glow */}
+    <div className="absolute inset-0 bg-gradient-to-br from-[#080b14]/80 via-transparent to-[#05070c]/90" />
+
+    {/* Subtle color atmosphere */}
+    <div className="absolute -top-40 left-1/4 w-[500px] h-[500px] rounded-full bg-cyan-500/[0.05] blur-[150px]" />
+
+    <div className="absolute top-1/3 right-[-10%] w-[600px] h-[600px] rounded-full bg-blue-500/[0.05] blur-[170px]" />
+
+    {/* Smooth transition into the next section */}
+    <div className="absolute inset-x-0 bottom-0 h-56 bg-gradient-to-t from-[#080b14] via-[#080b14]/70 to-transparent" />
+
+  </div>
+
+
+  {/* HERO CONTENT */}
+  <motion.div
+    style={{ opacity, scale }}
+    className="relative z-10 container-custom w-full pt-28 pb-16 sm:pt-32 sm:pb-20 lg:py-40"
+  >
+
+    {/* MAIN HERO */}
+    <div className="grid lg:grid-cols-2 gap-8 lg:gap-24 items-center">
+
+
+      {/* LEFT CONTENT */}
+      <motion.div
+        initial={{ opacity: 0, x: -40 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-center lg:text-left"
+      >
+
+        {/* Label */}
+        <div className="inline-flex items-center gap-3 mb-6 sm:mb-8">
+
+          {/* <span className="w-8 sm:w-10 h-px bg-cyan-400" /> */}
+
+          <span className="text-cyan-300 uppercase tracking-[0.2em] sm:tracking-[0.3em] text-[10px] sm:text-xs font-semibold">
+            Software & Digital Solutions
+          </span>
+
         </div>
 
-        {/* Hero Content */}
-        <motion.div 
-          style={{ opacity, scale }}
-          className="relative z-20 container-custom text-center py-20"
-        >
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8 }}
+
+        {/* Heading */}
+        <h1 className="text-[3.2rem] leading-[0.95] sm:text-6xl md:text-7xl lg:text-7xl xl:text-8xl font-bold tracking-tight mb-6 sm:mb-8">
+
+          <span className="block text-white">
+            Build Digital
+          </span>
+
+          <span className="block bg-gradient-to-r from-cyan-300 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+            Scale & Thrive
+          </span>
+
+        </h1>
+
+
+        {/* Description */}
+        <p className="text-base sm:text-lg md:text-xl text-gray-300 max-w-xl mx-auto lg:mx-0 mb-8 sm:mb-10 leading-relaxed">
+          We build powerful software and digital solutions that help
+          businesses launch, grow, and scale with confidence.
+        </p>
+
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center lg:justify-start justify-center gap-3 sm:gap-4">
+
+          <Link
+            to="/services"
+            className="btn-primary w-full sm:w-auto inline-flex justify-center items-center gap-2 text-base sm:text-lg px-7 sm:px-8 py-3.5 sm:py-4 group"
           >
-            <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-              <span className="text-white" style={{ marginTop: 100 }}>Build Digital</span>
-              <br />
-              <span className="gradient-text">Scale & Thrive</span>
-            </h1>
-            
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
-              From custom software development to domain registration and hosting, 
-              we provide end-to-end digital solutions that drive business growth and innovation.
-            </p>
+            Explore Our Services
 
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link to="/services" className="btn-primary inline-flex items-center gap-2 text-lg px-8 py-4 group">
-                Explore Our Services
-                <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
-              </Link>
-              <Link to="/contact" className="btn-secondary inline-flex items-center gap-2 text-lg px-8 py-4">
-                <FiPlay className="w-5 h-5" />
-                Watch Demo
-              </Link>
-            </div>
-          </motion.div>
+            <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+          </Link>
 
-          {/* Floating Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="grid grid-cols-2 md:grid-cols-4 gap-6 mt-16"
+
+          <Link
+            to="/contact"
+            className="btn-secondary w-full sm:w-auto inline-flex justify-center items-center gap-2 text-base sm:text-lg px-7 sm:px-8 py-3.5 sm:py-4"
           >
-            {stats.map((stat, index) => (
-              <div key={index} className="glass-effect rounded-2xl p-6 text-center backdrop-blur-xl">
-                <div className="text-3xl md:text-4xl font-bold gradient-text mb-1">
-                  {stat.number}
-                </div>
-                <div className="text-sm text-gray-300">{stat.label}</div>
-              </div>
-            ))}
-          </motion.div>
-        </motion.div>
+            Start Your Project
+          </Link>
 
-        {/* Scroll Indicator */}
+        </div>
+
+      </motion.div>
+
+
+      {/* RIGHT TECHNOLOGY VISUAL */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.8 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ duration: 1, delay: 0.2 }}
+        className="relative hidden sm:flex items-center justify-center h-[360px] md:h-[440px] lg:min-h-[560px]"
+      >
+
+        {/* Logo glow */}
+        <div className="absolute w-[220px] h-[220px] sm:w-[320px] sm:h-[320px] lg:w-[420px] lg:h-[420px] rounded-full bg-cyan-400/[0.08] blur-[80px] lg:blur-[110px]" />
+
+
+        {/* Outer ring */}
         <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 0.8 }}
-          className="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20"
-        >
-          <div className="flex flex-col items-center gap-2 text-gray-400 text-sm">
-            <span>Scroll to explore</span>
-            <div className="w-6 h-10 border-2 border-gray-400/30 rounded-full flex justify-center pt-2">
-              <div className="w-1 h-3 bg-accent-500 rounded-full animate-bounce"></div>
+          animate={{ rotate: 360 }}
+          transition={{
+            duration: 40,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute w-[250px] h-[250px] sm:w-[350px] sm:h-[350px] lg:w-[470px] lg:h-[470px] rounded-full border border-cyan-400/20"
+        />
+
+
+        {/* Inner ring */}
+        <motion.div
+          animate={{ rotate: -360 }}
+          transition={{
+            duration: 55,
+            repeat: Infinity,
+            ease: "linear"
+          }}
+          className="absolute w-[215px] h-[215px] sm:w-[300px] sm:h-[300px] lg:w-[400px] lg:h-[400px] rounded-full border border-blue-400/20 border-dashed"
+        />
+
+
+        {/* E LOGO */}
+        <div className="relative z-10 w-[190px] h-[190px] sm:w-[270px] sm:h-[270px] lg:w-[380px] lg:h-[380px] rounded-full flex items-center justify-center">
+
+          <div className="absolute inset-0 rounded-full bg-cyan-400/15 blur-3xl" />
+
+          <div className="relative w-full h-full rounded-full border-2 border-cyan-200/70 bg-gradient-to-br from-[#172536]/95 to-[#080b14]/95 shadow-[0_0_60px_rgba(34,211,238,0.25)] flex items-center justify-center overflow-hidden">
+
+            <div className="absolute inset-6 sm:inset-8 rounded-full border border-cyan-400/15" />
+
+            <div className="absolute inset-10 sm:inset-14 rounded-full border border-blue-400/15" />
+
+            <div className="relative z-10 text-[115px] sm:text-[165px] lg:text-[230px] font-black italic leading-none text-white drop-shadow-[0_0_25px_rgba(255,255,255,0.3)]">
+              E
             </div>
+
+            <div className="absolute left-0 right-0 top-1/2 h-px bg-gradient-to-r from-transparent via-cyan-300/80 to-transparent" />
+
           </div>
-        </motion.div>
-      </section>
+
+        </div>
+
+
+        {/* Floating nodes */}
+        <motion.div
+          animate={{ y: [-10, 10, -10] }}
+          transition={{ duration: 4, repeat: Infinity }}
+          className="absolute top-[8%] right-[12%] w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-cyan-300 shadow-[0_0_22px_#67e8f9]"
+        />
+
+
+        <motion.div
+          animate={{ y: [10, -10, 10] }}
+          transition={{ duration: 5, repeat: Infinity }}
+          className="absolute bottom-[10%] left-[10%] w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-blue-400 shadow-[0_0_22px_#60a5fa]"
+        />
+
+      </motion.div>
+
+    </div>
+
+
+    {/* STATS */}
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.5 }}
+      className="grid grid-cols-2 md:grid-cols-4 gap-3 sm:gap-5 mt-10 sm:mt-16 lg:mt-20"
+    >
+
+      {stats.map((stat, index) => (
+
+        <div
+          key={index}
+          className="border border-white/10 bg-[#080b14]/60 backdrop-blur-md rounded-xl sm:rounded-2xl p-4 sm:p-5 text-center hover:border-cyan-400/30 transition-colors"
+        >
+
+          <div className="text-xl sm:text-2xl md:text-3xl font-bold bg-gradient-to-r from-cyan-300 to-blue-400 bg-clip-text text-transparent mb-1">
+            {stat.number}
+          </div>
+
+          <div className="text-[11px] sm:text-sm text-gray-400">
+            {stat.label}
+          </div>
+
+        </div>
+
+      ))}
+
+    </motion.div>
+
+  </motion.div>
+
+</section>
 
       {/* Expertise Section */}
       <section className="py-20 bg-gradient-to-b from-[#0a0a0a] to-primary-900/10">
