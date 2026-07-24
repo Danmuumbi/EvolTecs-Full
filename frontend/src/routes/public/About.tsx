@@ -85,12 +85,12 @@ export const About = () => {
   //   }
   // ];
 
-  const milestones = [
-    { year: '2020', title: 'Founded', description: 'EvolTechs was born with a vision to transform digital solutions' },
-    { year: '2021', title: 'First 100 Clients', description: 'Reached 100 clients and expanded our services' },
-    { year: '2022', title: 'Global Expansion', description: 'Extended services to international markets' },
-    { year: '2023', title: '500+ Projects', description: 'Completed over 500 projects successfully' },
-  ];
+  // const milestones = [
+  //   { year: '2020', title: 'Founded', description: 'EvolTechs was born with a vision to transform digital solutions' },
+  //   { year: '2021', title: 'First 100 Clients', description: 'Reached 100 clients and expanded our services' },
+  //   { year: '2022', title: 'Global Expansion', description: 'Extended services to international markets' },
+  //   { year: '2023', title: '500+ Projects', description: 'Completed over 500 projects successfully' },
+  // ];
 
   const stats = [
     { number: '500+', label: 'Projects Delivered', icon: FiBriefcase },
