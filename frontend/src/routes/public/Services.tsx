@@ -260,10 +260,10 @@ export const Services = () => {
     <div className="min-h-screen overflow-x-hidden pt-20">
 
        <SEO
-      title="Software & Digital Solutions | EvolTechs"
-      description="Explore software development, cloud solutions, cybersecurity, AI and other digital technology solutions from EvolTechs Software Solutions."
-      canonical="https://evoltecs.com/services"
-    />
+  title="Software Development & Digital Solutions | EvolTechs"
+  description="Explore custom software development, mobile apps, cloud infrastructure, DevOps, cybersecurity, AI, data analytics and technical support from EvolTechs."
+  canonical="https://evoltecs.com/services"
+/>
 
     <div></div>
      {/* Hero Section */}

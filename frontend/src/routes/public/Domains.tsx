@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { apiClient } from '../../api/client';
 import SEO from "../../components/seo/SEO";
+import BreadcrumbSchema from "../../components/seo/BreadcrumbSchema";
 import { 
   FiSearch, 
   FiGlobe, 
@@ -119,6 +120,25 @@ export const Domains = () => {
   title="Domain Search & Registration | EvolTechs"
   description="Search and register your perfect domain name with EvolTechs Software Solutions. Find the right domain for your business, brand or online project."
   canonical="https://evoltecs.com/domains"
+/>
+
+<SEO
+  title="Domain Search & Registration | EvolTechs"
+  description="Search and register your perfect domain name with EvolTechs Software Solutions. Find the right domain for your business, brand or online project."
+  canonical="https://evoltecs.com/domains"
+/>
+
+<BreadcrumbSchema
+  items={[
+    {
+      name: "Home",
+      url: "https://evoltecs.com/",
+    },
+    {
+      name: "Domains",
+      url: "https://evoltecs.com/domains",
+    },
+  ]}
 />
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 overflow-hidden">

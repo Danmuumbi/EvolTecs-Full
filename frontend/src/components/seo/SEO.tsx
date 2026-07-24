@@ -14,95 +14,156 @@ const SEO = ({
   useEffect(() => {
     document.title = title;
 
-    // Meta description
+    // Meta Description
     let descriptionTag = document.querySelector(
       'meta[name="description"]'
-    ) as HTMLMetaElement | null;
+    );
 
     if (!descriptionTag) {
       descriptionTag = document.createElement("meta");
-      descriptionTag.setAttribute("name", "description");
+      descriptionTag.setAttribute(
+        "name",
+        "description"
+      );
+
       document.head.appendChild(descriptionTag);
     }
 
-    descriptionTag.setAttribute("content", description);
+    descriptionTag.setAttribute(
+      "content",
+      description
+    );
 
     // Canonical URL
     if (canonical) {
       let canonicalTag = document.querySelector(
         'link[rel="canonical"]'
-      ) as HTMLLinkElement | null;
+      );
 
       if (!canonicalTag) {
         canonicalTag = document.createElement("link");
-        canonicalTag.setAttribute("rel", "canonical");
+
+        canonicalTag.setAttribute(
+          "rel",
+          "canonical"
+        );
+
         document.head.appendChild(canonicalTag);
       }
 
-      canonicalTag.setAttribute("href", canonical);
+      canonicalTag.setAttribute(
+        "href",
+        canonical
+      );
     }
 
-    // Open Graph metadata
-    const setMeta = (
-      property: string,
-      content: string
-    ) => {
-      let meta = document.querySelector(
-        `meta[property="${property}"]`
-      ) as HTMLMetaElement | null;
-
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("property", property);
-        document.head.appendChild(meta);
-      }
-
-      meta.setAttribute("content", content);
-    };
-
-    setMeta("og:title", title);
-    setMeta("og:description", description);
-    setMeta("og:type", "website");
-    setMeta(
-      "og:url",
-      canonical || "https://evoltecs.com"
-    );
-    setMeta(
-      "og:image",
-      "https://evoltecs.com/og-image.png"
+    // Open Graph: Title
+    let ogTitle = document.querySelector(
+      'meta[property="og:title"]'
     );
 
-    // Twitter metadata
-    const setTwitterMeta = (
-      name: string,
-      content: string
-    ) => {
-      let meta = document.querySelector(
-        `meta[name="${name}"]`
-      ) as HTMLMetaElement | null;
+    if (!ogTitle) {
+      ogTitle = document.createElement("meta");
 
-      if (!meta) {
-        meta = document.createElement("meta");
-        meta.setAttribute("name", name);
-        document.head.appendChild(meta);
-      }
+      ogTitle.setAttribute(
+        "property",
+        "og:title"
+      );
 
-      meta.setAttribute("content", content);
-    };
+      document.head.appendChild(ogTitle);
+    }
 
-    setTwitterMeta(
-      "twitter:card",
-      "summary_large_image"
+    ogTitle.setAttribute(
+      "content",
+      title
     );
-    setTwitterMeta("twitter:title", title);
-    setTwitterMeta(
-      "twitter:description",
+
+    // Open Graph: Description
+    let ogDescription = document.querySelector(
+      'meta[property="og:description"]'
+    );
+
+    if (!ogDescription) {
+      ogDescription = document.createElement("meta");
+
+      ogDescription.setAttribute(
+        "property",
+        "og:description"
+      );
+
+      document.head.appendChild(ogDescription);
+    }
+
+    ogDescription.setAttribute(
+      "content",
       description
     );
-    setTwitterMeta(
-      "twitter:image",
+
+    // Open Graph: Image
+    let ogImage = document.querySelector(
+      'meta[property="og:image"]'
+    );
+
+    if (!ogImage) {
+      ogImage = document.createElement("meta");
+
+      ogImage.setAttribute(
+        "property",
+        "og:image"
+      );
+
+      document.head.appendChild(ogImage);
+    }
+
+    ogImage.setAttribute(
+      "content",
       "https://evoltecs.com/og-image.png"
     );
+
+    // Open Graph: URL
+    if (canonical) {
+      let ogUrl = document.querySelector(
+        'meta[property="og:url"]'
+      );
+
+      if (!ogUrl) {
+        ogUrl = document.createElement("meta");
+
+        ogUrl.setAttribute(
+          "property",
+          "og:url"
+        );
+
+        document.head.appendChild(ogUrl);
+      }
+
+      ogUrl.setAttribute(
+        "content",
+        canonical
+      );
+    }
+
+    // Open Graph: Type
+    let ogType = document.querySelector(
+      'meta[property="og:type"]'
+    );
+
+    if (!ogType) {
+      ogType = document.createElement("meta");
+
+      ogType.setAttribute(
+        "property",
+        "og:type"
+      );
+
+      document.head.appendChild(ogType);
+    }
+
+    ogType.setAttribute(
+      "content",
+      "website"
+    );
+
   }, [title, description, canonical]);
 
   return null;

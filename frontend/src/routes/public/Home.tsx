@@ -1,6 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
 import SEO from "../../components/seo/SEO";
+import OrganizationSchema from "../../components/seo/OrganizationSchema";
+import WebsiteSchema from "../../components/seo/WebsiteSchema";
 import { 
   FiArrowRight, 
   FiServer, 
@@ -189,11 +191,14 @@ export const Home = () => {
     <div className="min-h-screen overflow-x-hidden">
 
 
-         <SEO
-        title="EvolTechs Software Solutions | Domains, Hosting & Software"
-        description="EvolTechs Software Solutions provides domain registration, web hosting, business email, custom software development, cloud solutions, cloud infrastructure, cybersecurity and AI solutions."
-        canonical="https://evoltecs.com/"
-      />
+      <SEO
+  title="EvolTechs | Software, Hosting, Domains & Digital Solutions"
+  description="EvolTechs provides custom software development, domain registration, web hosting, business email, cloud solutions, cybersecurity and AI services for businesses ready to grow digitally."
+  canonical="https://evoltecs.com/"
+/>
+
+<OrganizationSchema />
+<WebsiteSchema />
 
    {/* Premium Technology Hero Section */}
 <section
