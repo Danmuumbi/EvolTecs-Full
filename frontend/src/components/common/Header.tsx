@@ -18,6 +18,7 @@ import {
   FiCode,
   FiMail,
   FiPhone,
+  FiInfo ,
   FiShoppingCart
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -42,6 +43,7 @@ export const Header = () => {
 
   const navLinks = [
     { name: 'Home', href: '/', icon: FiHome },
+    { name: 'About Us', href: '/about', icon: FiInfo },
     { name: 'Services', href: '/services', icon: FiCode, hasDropdown: true },
     { name: 'Hosting', href: '/hosting', icon: FiServer },
     { name: 'Domains', href: '/domains', icon: FiGlobe },

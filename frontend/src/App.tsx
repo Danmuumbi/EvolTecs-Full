@@ -45,6 +45,7 @@ import { Terms } from './routes/public/Terms';
 import { FAQs } from './routes/public/FAQs';
 import { AdminProfile } from './routes/admin/AdminProfile';
 // import { Chatbot } from './components/common/Chatbot';
+import { Privacy } from './routes/public/Privacy';
 
 function App() {
   const { user, isLoading } = useAuth();
@@ -77,6 +78,7 @@ function App() {
             <Route path="/renew/:domainId" element={<DomainRenewal />} />
             <Route path="/terms" element={<Terms />} />
               <Route path="/faqs" element={<FAQs />} />
+              <Route path="/privacy" element={<Privacy />} />
 
 
             <Route path="/forgot-password" element={<ForgotPassword />} />

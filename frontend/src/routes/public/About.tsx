@@ -6,7 +6,8 @@ import {
   FiCode, 
   FiUsers, 
   // FiAward, 
-  // FiGlobe,
+  FiGlobe,
+  FiArrowUpRight,
   FiHeart,
   FiTarget,
   FiEye,
@@ -119,8 +120,7 @@ export const About = () => {
               Building the <span className="gradient-text">Future of Tech</span>
             </h1>
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              We're a passionate team of developers, designers, and innovators 
-              dedicated to creating digital solutions that make a difference.
+              We help businesses turn ideas into powerful digital solutions , from software and websites to the technology and infrastructure that keep them running and growing.
             </p>
           </motion.div>
         </div>
@@ -292,7 +292,111 @@ export const About = () => {
         </div>
       </section> */}
 
-      {/* Milestones */}
+
+      {/* What Drives Us */}
+<section className="py-20 bg-[#0a0a0a]">
+  <div className="container-custom">
+
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="text-center mb-16"
+    >
+      <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
+        What Drives Us
+      </span>
+
+      <h2 className="text-3xl md:text-5xl font-bold mb-4">
+        Technology With <span className="gradient-text">Purpose</span>
+      </h2>
+
+      <p className="text-gray-400 max-w-2xl mx-auto">
+        We believe technology should be practical, reliable, and built to
+        create real opportunities for the people and businesses using it.
+      </p>
+    </motion.div>
+
+
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+      {/* Build With Purpose */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5 }}
+        viewport={{ once: true }}
+        className="glass-effect rounded-2xl p-8 group hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300"
+      >
+        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-400/20 to-primary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <FiCode className="w-7 h-7 text-accent-400" />
+        </div>
+
+        <h3 className="text-xl font-semibold text-white mb-3">
+          Build With Purpose
+        </h3>
+
+        <p className="text-gray-400 leading-relaxed">
+          We focus on creating digital solutions that solve real problems,
+          support real goals, and provide lasting value.
+        </p>
+      </motion.div>
+
+
+      {/* Make Technology Accessible */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.1 }}
+        viewport={{ once: true }}
+        className="glass-effect rounded-2xl p-8 group hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300"
+      >
+        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-400/20 to-primary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <FiGlobe className="w-7 h-7 text-accent-400" />
+        </div>
+
+        <h3 className="text-xl font-semibold text-white mb-3">
+          Make Technology Accessible
+        </h3>
+
+        <p className="text-gray-400 leading-relaxed">
+          Powerful technology should not be limited to large organizations.
+          We work to make digital tools and solutions more accessible to
+          businesses at different stages of growth.
+        </p>
+      </motion.div>
+
+
+      {/* Grow Together */}
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.5, delay: 0.2 }}
+        viewport={{ once: true }}
+        className="glass-effect rounded-2xl p-8 group hover:shadow-2xl hover:shadow-primary-500/10 transition-all duration-300"
+      >
+        <div className="w-14 h-14 rounded-xl bg-gradient-to-br from-accent-400/20 to-primary-400/20 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+          <FiArrowUpRight className="w-7 h-7 text-accent-400" />
+        </div>
+
+        <h3 className="text-xl font-semibold text-white mb-3">
+          Grow Together
+        </h3>
+
+        <p className="text-gray-400 leading-relaxed">
+          The best digital solutions grow with the people and businesses
+          they serve. We aim to build technology that can evolve as your
+          needs change.
+        </p>
+      </motion.div>
+
+    </div>
+
+  </div>
+</section>
+
+      {/* Milestones
       <section className="py-20 bg-[#0a0a0a]">
         <div className="container-custom">
           <motion.div
@@ -327,7 +431,7 @@ export const About = () => {
             ))}
           </div>
         </div>
-      </section>
+      </section> */}
 
       {/* Why Choose Us */}
       <section className="py-20 bg-gradient-to-b from-primary-900/10 to-[#0a0a0a]">
