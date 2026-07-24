@@ -1,41 +1,44 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { apiClient } from '../../api/client';
+import SEO from "../../components/seo/SEO";
 import { 
   FiSearch, 
   FiGlobe, 
-  // FiCheckCircle, 
   FiArrowRight,
   FiShield,
-  // FiClock,
-  // FiUsers,
-  // FiAward,
   FiLock,
   FiRefreshCw,
   FiDollarSign,
-  // FiStar,
-  // FiTrendingUp
+  FiShoppingCart,
+  FiLoader,
+  FiAlertCircle
 } from 'react-icons/fi';
-import { useState } from 'react';
+import { useCart } from '../../context/CartContext/CartProvider';
+import toast from 'react-hot-toast';
 
 export const Domains = () => {
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
   const [searchResults, setSearchResults] = useState<any[]>([]);
   const [showResults, setShowResults] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const { addItem } = useCart();
 
   const popularTLDs = [
-    { name: '.com', price: 'KSH 1100', popular: true, color: 'from-blue-400 to-blue-600' },
-    { name: '.ke', price: 'KSH 1200', popular: true, color: 'from-green-400 to-green-600' },
+    { name: '.com', price: 'KSH 1,100', popular: true, color: 'from-blue-400 to-blue-600' },
+    { name: '.ke', price: 'KSH 1,200', popular: true, color: 'from-green-400 to-green-600' },
     { name: '.org', price: 'KSH 800', popular: true, color: 'from-purple-400 to-purple-600' },
-    { name: '.net', price: 'KSH 1000', popular: false, color: 'from-red-400 to-red-600' },
-    { name: '.tech', price: 'KSH 1400', popular: false, color: 'from-cyan-400 to-cyan-600' },
-    { name: '.cloud', price: 'KSH 1600', popular: false, color: 'from-indigo-400 to-indigo-600' },
-    { name: '.io', price: 'KSH 1800', popular: false, color: 'from-pink-400 to-pink-600' },
-    { name: '.app', price: 'KSH 1500', popular: false, color: 'from-yellow-400 to-yellow-600' },
-    { name: '.co', price: 'KSH 1100', popular: false, color: 'from-orange-400 to-orange-600' },
-    { name: '.online', price: 'KSH 1300', popular: false, color: 'from-teal-400 to-teal-600' },
-    { name: '.shop', price: 'KSH 1700', popular: false, color: 'from-rose-400 to-rose-600' },
-    { name: '.dev', price: 'KSH 1900', popular: false, color: 'from-violet-400 to-violet-600' },
+    { name: '.net', price: 'KSH 1,000', popular: false, color: 'from-red-400 to-red-600' },
+    { name: '.tech', price: 'KSH 1,400', popular: false, color: 'from-cyan-400 to-cyan-600' },
+    { name: '.cloud', price: 'KSH 1,600', popular: false, color: 'from-indigo-400 to-indigo-600' },
+    { name: '.io', price: 'KSH 1,800', popular: false, color: 'from-pink-400 to-pink-600' },
+    { name: '.app', price: 'KSH 1,500', popular: false, color: 'from-yellow-400 to-yellow-600' },
+    { name: '.co', price: 'KSH 1,100', popular: false, color: 'from-orange-400 to-orange-600' },
+    { name: '.online', price: 'KSH 1,300', popular: false, color: 'from-teal-400 to-teal-600' },
+    { name: '.shop', price: 'KSH 1,700', popular: false, color: 'from-rose-400 to-rose-600' },
+    { name: '.dev', price: 'KSH 1,900', popular: false, color: 'from-violet-400 to-violet-600' },
   ];
 
   const domainFeatures = [
@@ -45,32 +48,78 @@ export const Domains = () => {
     { icon: FiDollarSign, title: 'Competitive Pricing', description: 'Best prices with no hidden fees' },
   ];
 
-  const handleSearch = (e: React.FormEvent) => {
+  const handleSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    if (!searchQuery) return;
+    console.log('🔍 Search triggered for:', searchQuery);
+    
+    if (!searchQuery.trim()) {
+      toast.error('Please enter a domain name');
+      return;
+    }
 
     setIsSearching(true);
-    // Simulate API call
-    setTimeout(() => {
-      const results = popularTLDs.map(tld => ({
-        domain: `${searchQuery}${tld.name}`,
-        price: tld.price,
-        available: Math.random() > 0.3,
-        tld: tld.name,
-        popular: tld.popular
-      }));
-      setSearchResults(results);
+    setError(null);
+    setShowResults(false);
+
+    try {
+      console.log('📡 Calling API...');
+      const response = await apiClient.get('/domains/search', {
+        params: {
+          query: searchQuery.trim(),
+        },
+      });
+      
+      console.log('📊 API Response:', response.data);
+      
+      setSearchResults(response.data.results || []);
       setShowResults(true);
+      
+      if (response.data.results?.length === 0) {
+        toast('No domains found', {
+          icon: '🔍',
+        });
+      }
+    } catch (error: any) {
+      console.error('❌ Search error:', error);
+      setError(error.response?.data?.message || 'Failed to search domains. Please try again.');
+      toast.error('Search failed');
+    } finally {
       setIsSearching(false);
-    }, 1000);
+    }
   };
 
   const handleTLDClick = (tld: string) => {
     setSearchQuery(searchQuery + tld);
   };
 
+  const handleAddToCart = (result: any) => {
+    // ✅ Ensure price is a number
+    const price = typeof result.price === 'string' ? parseFloat(result.price) : (result.price || 0);
+    
+    addItem({
+      id: `domain-${result.domain}`,
+      type: 'domain',
+      name: result.domain,
+      price: price,
+      quantity: 1,
+      details: {
+        domain: result.domain,
+        tld: result.tld,
+        price: result.price
+      }
+    });
+  };
+
+  console.log('📄 Domains page rendering');
+
   return (
-    <div className="min-h-screen overflow-x-hidden pt-20">
+    <div className="min-h-screen overflow-x-hidden pt-20 bg-[#0a0a0a]">
+
+      <SEO
+  title="Domain Search & Registration | EvolTechs"
+  description="Search and register your perfect domain name with EvolTechs Software Solutions. Find the right domain for your business, brand or online project."
+  canonical="https://evoltecs.com/domains"
+/>
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary-900/30 via-primary-900/10 to-transparent"></div>
@@ -84,7 +133,7 @@ export const Domains = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
-              COMMING SOON
+              Find Your Perfect Domain
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Claim Your <span className="gradient-text">Digital Identity</span>
@@ -114,7 +163,7 @@ export const Domains = () => {
                 >
                   {isSearching ? (
                     <>
-                      <span className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                      <FiLoader className="w-5 h-5 animate-spin" />
                       Searching...
                     </>
                   ) : (
@@ -164,42 +213,73 @@ export const Domains = () => {
                 <span className="text-sm text-gray-400">{searchResults.length} results</span>
               </div>
 
-              <div className="space-y-3">
-                {searchResults.map((result, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.3, delay: index * 0.05 }}
-                    className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors"
-                  >
-                    <div className="flex items-center gap-4">
-                      <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${result.popular ? 'from-accent-400 to-primary-400' : 'from-gray-600 to-gray-400'} flex items-center justify-center`}>
-                        <FiGlobe className="w-5 h-5 text-white" />
+              {searchResults.length === 0 ? (
+                <div className="text-center py-8">
+                  <FiAlertCircle className="w-12 h-12 text-yellow-400 mx-auto mb-4" />
+                  <p className="text-gray-400">No domains found. Try a different search.</p>
+                </div>
+              ) : (
+                <div className="space-y-3">
+                  {searchResults.map((result, index) => (
+                    <motion.div
+                      key={index}
+                      initial={{ opacity: 0, x: -20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.3, delay: index * 0.05 }}
+                      className="flex items-center justify-between p-4 rounded-xl bg-white/5 hover:bg-white/10 transition-colors flex-wrap gap-2"
+                    >
+                      <div className="flex items-center gap-4">
+                        <div className={`w-10 h-10 rounded-lg bg-gradient-to-r ${result.available ? 'from-accent-400 to-primary-400' : 'from-gray-600 to-gray-400'} flex items-center justify-center`}>
+                          <FiGlobe className="w-5 h-5 text-white" />
+                        </div>
+                        <div>
+                          <span className="text-lg font-medium text-white">{result.domain}</span>
+                          {result.available && (
+                            <span className="ml-2 px-2 py-0.5 bg-emerald-500/20 text-emerald-400 text-xs rounded-full">Available</span>
+                          )}
+                          {!result.available && (
+                            <span className="ml-2 px-2 py-0.5 bg-red-500/20 text-red-400 text-xs rounded-full">Taken</span>
+                          )}
+                        </div>
                       </div>
-                      <div>
-                        <span className="text-lg font-medium text-white">{result.domain}</span>
-                        {result.popular && (
-                          <span className="ml-2 px-2 py-0.5 bg-accent-400/20 text-accent-400 text-xs rounded-full">Popular</span>
+                      <div className="flex items-center gap-4 flex-wrap">
+                        <span className="text-sm font-semibold text-accent-400">
+                          {/* ✅ FIX: Convert price to number before toFixed */}
+                          KSH {result.price ? Number(result.price).toFixed(0) : '0'}/yr
+                        </span>
+                        {result.available ? (
+                          <button
+                            onClick={() => handleAddToCart(result)}
+                            className="px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg text-white text-sm font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300 flex items-center gap-2"
+                          >
+                            <FiShoppingCart className="w-4 h-4" />
+                            Add to Cart
+                          </button>
+                        ) : (
+                          <span className="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg text-sm font-medium">
+                            Taken
+                          </span>
                         )}
                       </div>
-                    </div>
-                    <div className="flex items-center gap-4">
-                      <span className="text-sm font-semibold text-accent-400">{result.price}/yr</span>
-                      {result.available ? (
-                        <button className="px-4 py-2 bg-gradient-to-r from-primary-500 to-accent-500 rounded-lg text-white text-sm font-medium hover:shadow-lg hover:shadow-primary-500/30 transition-all duration-300">
-                          Register
-                        </button>
-                      ) : (
-                        <span className="px-4 py-2 bg-red-500/20 text-red-400 rounded-lg text-sm font-medium">
-                          Taken
-                        </span>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
+                    </motion.div>
+                  ))}
+                </div>
+              )}
             </motion.div>
+          </div>
+        </section>
+      )}
+
+      {/* Error State */}
+      {error && (
+        <section className="py-8">
+          <div className="container-custom">
+            <div className="glass-effect rounded-2xl p-6 border border-red-500/20 bg-red-500/5">
+              <div className="flex items-center gap-3 text-red-400">
+                <FiAlertCircle className="w-6 h-6" />
+                <p>{error}</p>
+              </div>
+            </div>
           </div>
         </section>
       )}

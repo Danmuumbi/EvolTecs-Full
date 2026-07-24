@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from "../../components/seo/SEO";
 import { 
   FiServer, 
   FiCheckCircle, 
@@ -7,7 +8,6 @@ import {
   FiShield,
   FiClock,
   FiUsers,
-  // FiAward,
   FiZap,
   FiDatabase,
   FiGlobe,
@@ -16,14 +16,16 @@ import {
   FiRefreshCw,
   FiTrendingUp,
   FiCpu,
-  // FiHardDrive,
   FiCloud,
-  FiBox
+  FiBox,
+  FiShoppingCart
 } from 'react-icons/fi';
 import { useState } from 'react';
+import { useCart } from '../../context/CartContext/CartProvider';
 
 export const Hosting = () => {
   const [billingCycle, setBillingCycle] = useState<'monthly' | 'yearly'>('yearly');
+  const { addItem } = useCart();
 
   const hostingPlans = [
     {
@@ -134,6 +136,12 @@ export const Hosting = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden pt-20">
+      
+      <SEO
+  title="Web Hosting Services | EvolTechs"
+  description="Reliable web hosting solutions for businesses, organizations and online projects from EvolTechs Software Solutions."
+  canonical="https://evoltecs.com/hosting"
+/>
       {/* Hero Section */}
       <section className="relative py-20 md:py-28 overflow-hidden">
         <div className="absolute inset-0 bg-gradient-to-b from-primary-900/30 via-primary-900/10 to-transparent"></div>
@@ -147,7 +155,7 @@ export const Hosting = () => {
             transition={{ duration: 0.6 }}
           >
             <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
-              Web Hosting : COMMING SOON
+              Web Hosting : COMING SOON
             </span>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
               Fast, Secure & <span className="gradient-text">Reliable</span>
@@ -161,7 +169,7 @@ export const Hosting = () => {
             <div className="inline-flex items-center gap-4 glass-effect rounded-xl p-2 backdrop-blur-xl">
               <button
                 onClick={() => setBillingCycle('monthly')}
-                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 KSH {
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 ${
                   billingCycle === 'monthly'
                     ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30'
                     : 'text-gray-400 hover:text-white'
@@ -171,7 +179,7 @@ export const Hosting = () => {
               </button>
               <button
                 onClick={() => setBillingCycle('yearly')}
-                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative KSH {
+                className={`px-6 py-2.5 rounded-lg text-sm font-medium transition-all duration-300 relative ${
                   billingCycle === 'yearly'
                     ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30'
                     : 'text-gray-400 hover:text-white'
@@ -197,7 +205,7 @@ export const Hosting = () => {
                 initial={{ opacity: 0, y: 30 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: index * 0.1 }}
-                className={`glass-effect rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 border relative KSH {
+                className={`glass-effect rounded-2xl p-6 hover:shadow-2xl transition-all duration-500 border relative ${
                   plan.popular 
                     ? 'border-accent-400/40 shadow-xl shadow-accent-400/10' 
                     : 'border-white/5 hover:border-white/10'
@@ -211,7 +219,7 @@ export const Hosting = () => {
                 )}
 
                 {/* Plan Icon */}
-                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br KSH {plan.gradient} p-0.5 mb-4`}>
+                <div className={`w-14 h-14 rounded-xl bg-gradient-to-br ${plan.gradient} p-0.5 mb-4`}>
                   <div className="w-full h-full bg-[#0a0a0a] rounded-xl flex items-center justify-center">
                     <plan.icon className="w-7 h-7 text-white" />
                   </div>
@@ -234,7 +242,6 @@ export const Hosting = () => {
                     </div>
                   )}
                 </div>
-                
 
                 {/* Features */}
                 <ul className="space-y-2 mb-6">
@@ -247,17 +254,39 @@ export const Hosting = () => {
                 </ul>
 
                 {/* CTA */}
-                <Link
-                  to="/contact"
-                  className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 KSH {
-                    plan.popular
-                      ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40'
-                      : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
-                  }`}
-                >
-                  Get Started
-                  <FiArrowRight className="w-4 h-4" />
-                </Link>
+                <div className="flex flex-col gap-2">
+                  <Link
+                    to="/contact"
+                    className={`w-full inline-flex items-center justify-center gap-2 px-6 py-3 rounded-xl font-medium transition-all duration-300 ${
+                      plan.popular
+                        ? 'bg-gradient-to-r from-primary-500 to-accent-500 text-white shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40'
+                        : 'bg-white/5 text-white hover:bg-white/10 border border-white/10'
+                    }`}
+                  >
+                    Get Started
+                    <FiArrowRight className="w-4 h-4" />
+                  </Link>
+                  
+                  {/* Add to Cart Button */}
+                  <button
+                    onClick={() => addItem({
+                      id: `hosting-${plan.id}`,
+                      type: 'hosting',
+                      name: `${plan.name} Hosting Plan`,
+                      price: billingCycle === 'monthly' ? plan.price.monthly : plan.price.yearly,
+                      quantity: 1,
+                      details: {
+                        plan: plan.name,
+                        billingCycle: billingCycle,
+                        features: plan.features
+                      }
+                    })}
+                    className="w-full py-2.5 rounded-lg bg-accent-500/20 hover:bg-accent-500/30 text-accent-400 font-medium text-sm transition-all duration-300 flex items-center justify-center gap-2 border border-accent-500/20 hover:border-accent-500/40"
+                  >
+                    <FiShoppingCart className="w-4 h-4" />
+                    Add to Cart
+                  </button>
+                </div>
               </motion.div>
             ))}
           </div>

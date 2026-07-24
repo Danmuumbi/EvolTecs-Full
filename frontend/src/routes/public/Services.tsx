@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import SEO from "../../components/seo/SEO";
 import { 
   FiArrowRight, 
   FiCode, 
@@ -257,32 +258,166 @@ export const Services = () => {
 
   return (
     <div className="min-h-screen overflow-x-hidden pt-20">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-28 overflow-hidden">
-        <div className="absolute inset-0 bg-gradient-to-b from-primary-900/30 via-primary-900/10 to-transparent"></div>
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-primary-500/10 rounded-full blur-3xl"></div>
-        
-        <div className="container-custom relative z-10 text-center">
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 px-4 py-2 rounded-full inline-block mb-4">
-              Our Services
-            </span>
-            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6">
-              Digital Solutions for <br />
-              <span className="gradient-text">Modern Business</span>
-            </h1>
-            <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto">
-              From custom software development to cloud infrastructure, 
-              we provide comprehensive services to power your digital transformation.
-            </p>
-          </motion.div>
-        </div>
-      </section>
+
+       <SEO
+      title="Software & Digital Solutions | EvolTechs"
+      description="Explore software development, cloud solutions, cybersecurity, AI and other digital technology solutions from EvolTechs Software Solutions."
+      canonical="https://evoltecs.com/services"
+    />
+
+    <div></div>
+     {/* Hero Section */}
+<section className="relative py-24 md:py-32 overflow-hidden">
+
+  {/* Deep base background */}
+  <div className="absolute inset-0 bg-[#080b14]"></div>
+
+  {/* Large ambient technology glow */}
+  <div className="absolute inset-0 overflow-hidden pointer-events-none">
+
+    <div className="absolute top-[-25%] left-[10%] w-[500px] h-[500px] rounded-full bg-blue-600/10 blur-[140px]" />
+
+    <div className="absolute top-[10%] right-[-10%] w-[600px] h-[600px] rounded-full bg-purple-600/10 blur-[160px]" />
+
+    <div className="absolute bottom-[-40%] left-[35%] w-[600px] h-[500px] rounded-full bg-cyan-500/5 blur-[150px]" />
+
+  </div>
+
+  {/* Technical grid */}
+  <div
+    className="
+      absolute inset-0
+      opacity-[0.12]
+      pointer-events-none
+      [background-image:linear-gradient(rgba(255,255,255,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.08)_1px,transparent_1px)]
+      [background-size:70px_70px]
+      [mask-image:linear-gradient(to_bottom,black,transparent)]
+    "
+  />
+
+  {/* Abstract network lines */}
+  <div className="absolute inset-0 pointer-events-none overflow-hidden">
+
+    <motion.div
+      animate={{
+        x: [0, 30, 0],
+        y: [0, -20, 0],
+        opacity: [0.2, 0.45, 0.2],
+      }}
+      transition={{
+        duration: 12,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      className="
+        absolute
+        top-[15%]
+        left-[8%]
+        w-[500px]
+        h-[300px]
+        border-t
+        border-l
+        border-cyan-400/20
+        rounded-[40%]
+        rotate-[-18deg]
+      "
+    />
+
+    <motion.div
+      animate={{
+        x: [0, -40, 0],
+        y: [0, 25, 0],
+        opacity: [0.15, 0.4, 0.15],
+      }}
+      transition={{
+        duration: 15,
+        repeat: Infinity,
+        ease: "easeInOut",
+      }}
+      className="
+        absolute
+        top-[5%]
+        right-[5%]
+        w-[550px]
+        h-[350px]
+        border-r
+        border-b
+        border-purple-400/20
+        rounded-[40%]
+        rotate-[20deg]
+      "
+    />
+
+  </div>
+
+  {/* Floating technology nodes */}
+  <div className="absolute inset-0 pointer-events-none">
+
+    <motion.div
+      animate={{ y: [0, -15, 0] }}
+      transition={{ duration: 5, repeat: Infinity }}
+      className="absolute top-[22%] left-[15%] w-2 h-2 rounded-full bg-cyan-400 shadow-[0_0_20px_rgba(34,211,238,0.8)]"
+    />
+
+    <motion.div
+      animate={{ y: [0, 20, 0] }}
+      transition={{ duration: 6, repeat: Infinity }}
+      className="absolute top-[35%] right-[18%] w-2 h-2 rounded-full bg-purple-400 shadow-[0_0_20px_rgba(168,85,247,0.8)]"
+    />
+
+    <motion.div
+      animate={{ y: [0, -12, 0] }}
+      transition={{ duration: 4, repeat: Infinity }}
+      className="absolute bottom-[25%] left-[25%] w-1.5 h-1.5 rounded-full bg-blue-400 shadow-[0_0_15px_rgba(96,165,250,0.8)]"
+    />
+
+  </div>
+
+  {/* Bottom fade */}
+  <div className="absolute inset-x-0 bottom-0 h-40 bg-gradient-to-t from-[#0a0a0a] to-transparent pointer-events-none" />
+
+  {/* Hero Content */}
+  <div className="container-custom relative z-10 text-center">
+
+    <motion.div
+      initial={{ opacity: 0, y: 25 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.7 }}
+    >
+
+      <span className="inline-flex items-center gap-2 text-sm font-medium text-accent-400 uppercase tracking-wider bg-accent-400/10 border border-accent-400/20 px-4 py-2 rounded-full mb-6">
+
+        <span className="w-2 h-2 rounded-full bg-accent-400 animate-pulse"></span>
+
+        Our Services
+
+      </span>
+
+      <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
+
+        Digital Solutions for
+
+        <br />
+
+        <span className="gradient-text">
+          Modern Business
+        </span>
+
+      </h1>
+
+      <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto leading-relaxed">
+
+        From custom software development to cloud infrastructure,
+        we engineer the technology that helps ambitious businesses
+        build, scale, and move forward.
+
+      </p>
+
+    </motion.div>
+
+  </div>
+
+</section>
 
       {/* Stats Section */}
       <section className="py-12 bg-gradient-to-b from-transparent to-primary-900/5">

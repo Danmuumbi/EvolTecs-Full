@@ -4,6 +4,7 @@ export interface User {
   firstName: string;
   lastName: string;
   role: 'visitor' | 'customer' | 'admin';
+  adminType?: 'super' | 'support'; // ✅ Add this field - it's optional
   phone?: string;
   company?: string;
   emailVerified: boolean;
@@ -31,6 +32,7 @@ export interface RegisterData {
 }
 
 export interface LoginResponse {
+  message: string;
   user: User;
   token: string;
 }

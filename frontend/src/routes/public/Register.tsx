@@ -1,7 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
-import { useAuth } from '@context/AuthContext/useAuth';
-import { FiMail, FiLock, FiUser, FiPhone, FiBriefcase, FiEye, FiEyeOff } from 'react-icons/fi';
+// import { Link, useNavigate, useLocation } from 'react-router-dom';
+import { Link,  useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext/useAuth';
+import { FiMail, FiLock, FiUser, FiPhone, FiBriefcase, FiEye, FiEyeOff, FiCheckCircle, FiSend } from 'react-icons/fi';
+import { apiClient } from '../../api/client';
+import toast from 'react-hot-toast';
 
 export const Register = () => {
   const [formData, setFormData] = useState({
@@ -16,8 +19,15 @@ export const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
+  const [registrationSuccess, setRegistrationSuccess] = useState(false);
+  const [registeredEmail, setRegisteredEmail] = useState('');
+  const [isResending, setIsResending] = useState(false);
   const { register } = useAuth();
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
+  const location = useLocation();
+
+  // Get the redirect path from location state, default to '/dashboard'
+  const from = location.state?.from || '/dashboard';
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({
@@ -26,16 +36,34 @@ export const Register = () => {
     });
   };
 
+  const handleResendVerification = async () => {
+    if (!registeredEmail) {
+      toast.error('No email found. Please register again.');
+      return;
+    }
+
+    setIsResending(true);
+    try {
+      await apiClient.post('/auth/resend-verification', { email: registeredEmail });
+      toast.success('Verification email resent! Please check your inbox.');
+    } catch (error: any) {
+      const message = error.response?.data?.message || 'Failed to resend verification email';
+      toast.error(message);
+    } finally {
+      setIsResending(false);
+    }
+  };
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
     if (formData.password !== formData.confirmPassword) {
-      alert('Passwords do not match');
+      toast.error('Passwords do not match');
       return;
     }
 
     if (formData.password.length < 8) {
-      alert('Password must be at least 8 characters');
+      toast.error('Password must be at least 8 characters');
       return;
     }
 
@@ -49,13 +77,71 @@ export const Register = () => {
         phone: formData.phone || undefined,
         company: formData.company || undefined,
       });
-      navigate('/dashboard');
+      
+      // Set success state
+      setRegistrationSuccess(true);
+      setRegisteredEmail(formData.email);
+      toast.success('Account created! Please verify your email.');
+      
+      // Don't navigate - show success message instead
     } catch (error) {
       // Error handled by AuthProvider
     } finally {
       setIsLoading(false);
     }
   };
+
+  // If registration is successful, show success message
+  if (registrationSuccess) {
+    return (
+      <div className="min-h-screen pt-20 pb-12 px-4 bg-[#0a0a0a] flex items-center justify-center">
+        <div className="max-w-md w-full glass-effect rounded-2xl p-8">
+          <div className="text-center">
+            <div className="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4">
+              <FiCheckCircle className="w-10 h-10 text-green-500" />
+            </div>
+            <h2 className="text-2xl font-bold text-white mb-2">Account Created! 🎉</h2>
+            <p className="text-gray-400 text-sm mb-4">
+              We've sent a verification email to:
+            </p>
+            <p className="text-accent-400 font-medium mb-4">{registeredEmail}</p>
+            <div className="bg-yellow-500/10 border border-yellow-500/30 rounded-lg p-4 mb-6 text-left">
+              <p className="text-sm text-yellow-400">
+                📧 Please check your inbox and spam folder to verify your email address before logging in.
+              </p>
+            </div>
+            
+            <div className="space-y-3">
+              <button
+                onClick={handleResendVerification}
+                disabled={isResending}
+                className="w-full btn-secondary py-2.5 text-sm flex items-center justify-center gap-2 disabled:opacity-50"
+              >
+                {isResending ? (
+                  <>
+                    <span className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin"></span>
+                    Sending...
+                  </>
+                ) : (
+                  <>
+                    <FiSend className="w-4 h-4" />
+                    Resend Verification Email
+                  </>
+                )}
+              </button>
+              
+              <Link
+                to="/login"
+                className="block w-full btn-primary py-2.5 text-sm text-center"
+              >
+                Go to Login
+              </Link>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="min-h-screen pt-20 pb-12 px-4 bg-[#0a0a0a] overflow-y-auto">
@@ -224,7 +310,7 @@ export const Register = () => {
 
           <p className="text-center text-gray-400 mt-4 text-sm">
             Already have an account?{' '}
-            <Link to="/login" className="text-accent-400 hover:text-accent-300 transition-colors font-medium">
+            <Link to="/login" state={{ from }} className="text-accent-400 hover:text-accent-300 transition-colors font-medium">
               Sign In
             </Link>
           </p>

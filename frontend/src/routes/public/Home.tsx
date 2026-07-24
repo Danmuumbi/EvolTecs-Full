@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
 import { motion, useScroll, useTransform } from 'framer-motion';
+import SEO from "../../components/seo/SEO";
 import { 
   FiArrowRight, 
   FiServer, 
@@ -10,14 +11,14 @@ import {
   FiCloud,
   FiSmartphone,
   FiDatabase,
-  // FiUsers,
-  // FiAward,
-  // FiClock,
   FiCheckCircle,
   FiPlay,
   FiSearch,
-  // FiCpu,
-  // FiLayers
+  FiHeadphones,
+  FiLayers,
+  FiTrendingUp,
+  FiZap,
+  FiSun,
 } from 'react-icons/fi';
 import { 
   SiReact, 
@@ -35,15 +36,17 @@ import {
   SiFirebase,
   SiKubernetes,
   SiRedis,
-  // SiTensorflow,
   SiSpring
 } from 'react-icons/si';
 import { useRef, useState } from 'react';
+import { apiClient } from "../../api/client";
 
 export const Home = () => {
   const targetRef = useRef<HTMLDivElement>(null);
   const [searchQuery, setSearchQuery] = useState('');
   const [isSearching, setIsSearching] = useState(false);
+  const [results, setResults] = useState<any[]>([]);
+  const [searchError, setSearchError] = useState("");
   
   const { scrollYProgress } = useScroll({
     target: targetRef,
@@ -52,12 +55,40 @@ export const Home = () => {
   const opacity = useTransform(scrollYProgress, [0, 0.5], [1, 0]);
   const scale = useTransform(scrollYProgress, [0, 0.5], [1, 0.95]);
 
-  const handleDomainSearch = (e: React.FormEvent) => {
+  const handleDomainSearch = async (e: React.FormEvent) => {
     e.preventDefault();
-    setIsSearching(true);
-    // API call will go here
-    console.log('Searching for:', searchQuery);
-    setTimeout(() => setIsSearching(false), 1000);
+
+    if (!searchQuery.trim()) return;
+
+    try {
+      setIsSearching(true);
+      setSearchError("");
+      setResults([]);
+
+      // const response = await apiClient.get(
+      //   `/domains/search?domain=${encodeURIComponent(searchQuery)}`
+      // );
+
+      const response = await apiClient.get(
+  `/domains/search?query=${encodeURIComponent(searchQuery)}`
+);
+
+      setResults(response.data.results);
+
+    } catch (err: any) {
+
+      console.error(err);
+
+      setSearchError(
+        err.response?.data?.message ||
+        "Unable to search domains."
+      );
+
+    } finally {
+
+      setIsSearching(false);
+
+    }
   };
 
   const services = [
@@ -129,7 +160,7 @@ export const Home = () => {
     { name: 'AWS', icon: SiAmazonaws, color: '#FF9900' },
     { name: 'Docker', icon: SiDocker, color: '#2496ED' },
     { name: 'Vue.js', icon: SiVuedotjs, color: '#4FC08D' },
-    { name: 'Spring Boot', icon: SiSpring, color: '#6DB33F' }, // Alternative to Java
+    { name: 'Spring Boot', icon: SiSpring, color: '#6DB33F' },
     { name: 'MongoDB', icon: SiMongodb, color: '#47A248' },
     { name: 'GraphQL', icon: SiGraphql, color: '#E10098' },
     { name: 'Next.js', icon: SiNextdotjs, color: '#000000' },
@@ -149,8 +180,21 @@ export const Home = () => {
     { tld: '.app', price: '$15.99', popular: false },
   ];
 
+  
+
   return (
+
+
+    
     <div className="min-h-screen overflow-x-hidden">
+
+
+         <SEO
+        title="EvolTechs Software Solutions | Domains, Hosting & Software"
+        description="EvolTechs Software Solutions provides domain registration, web hosting, business email, custom software development, cloud solutions, cloud infrastructure, cybersecurity and AI solutions."
+        canonical="https://evoltecs.com/"
+      />
+      
       {/* Video Hero Section */}
       <section ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
@@ -166,11 +210,11 @@ export const Home = () => {
             muted
             playsInline
             className="absolute inset-0 w-full h-full object-cover"
-            poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920"
+            // poster="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1920"
+            poster="https://img.magnific.com/free-vector/realistic-technology-background_52683-73672.jpg?semt=ais_hybrid&w=740&q=80"
           >
             <source 
-              // src="https://storage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" 
-                src="/hero.mp4" 
+              src="/hero1.mp4" 
               type="video/mp4" 
             />
           </video>
@@ -186,10 +230,6 @@ export const Home = () => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
           >
-            {/* <div className="inline-block px-4 py-2 glass-effect rounded-full mb-6">
-              <span className="text-sm font-medium gradient-text"> Trusted by 500+ Businesses</span>
-            </div> */}
-            
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
               <span className="text-white">Transform Your</span>
               <br />
@@ -286,6 +326,9 @@ export const Home = () => {
         </div>
       </section>
 
+
+      
+
       {/* Domain Search Section - Premium Version */}
       <section className="py-24 bg-gradient-to-b from-primary-900/30 via-primary-900/10 to-transparent relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('/assets/grid-pattern.svg')] opacity-5"></div>
@@ -305,7 +348,7 @@ export const Home = () => {
                 Start Your <span className="gradient-text">Online Journey</span>
               </h2>
               <p className="text-gray-400 text-lg max-w-2xl mx-auto">
-                Comming soon: Search and register your ideal domain name with ease and confidence
+                Search thousands of domain extensions instantly and secure your online identity.
               </p>
             </div>
 
@@ -317,7 +360,7 @@ export const Home = () => {
                     type="text"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
-                    placeholder="Comming soon..."
+                    placeholder="Search your perfect domain..."
                     className="w-full pl-12 pr-4 py-4 md:py-5 bg-white/5 border border-white/10 rounded-xl text-white text-lg placeholder-gray-500 focus:outline-none focus:border-accent-400 focus:ring-2 focus:ring-accent-400/20 transition-all duration-300"
                   />
                 </div>
@@ -339,6 +382,52 @@ export const Home = () => {
                   )}
                 </button>
               </form>
+
+              {searchError && (
+                <div className="mt-6 rounded-xl bg-red-500/10 border border-red-500/20 p-4 text-red-400">
+                  {searchError}
+                </div>
+              )}
+
+              {results.length > 0 && (
+                <div className="mt-8 space-y-3">
+                  {results.map((item) => (
+                    <div
+                      key={item.domain}
+                      className="flex justify-between items-center bg-white/5 rounded-xl p-5 border border-white/5"
+                    >
+                      <div>
+                        <h4 className="text-white font-semibold">
+                          {item.domain}
+                        </h4>
+                        <p className="text-gray-400 text-sm">
+                          {item.available
+                            ? "Available"
+                            : "Already Registered"}
+                        </p>
+                      </div>
+                      <div className="text-right">
+                        {item.available ? (
+                          <>
+                            <div className="text-accent-400 font-bold">
+                              ${item.price}
+                            </div>
+                            <button
+                              className="btn-primary mt-2 px-5 py-2 text-sm"
+                            >
+                              Register
+                            </button>
+                          </>
+                        ) : (
+                          <span className="text-red-400 font-medium">
+                            Unavailable
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              )}
 
               <div className="mt-8">
                 <p className="text-sm text-gray-400 mb-4 text-center">Popular domain extensions</p>
@@ -417,6 +506,342 @@ export const Home = () => {
               </motion.div>
             ))}
           </div>
+        </div>
+      </section>
+
+
+      {/* Why Businesses Choose EvolTechs */}
+<section className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+  {/* Background atmosphere */}
+  <div className="absolute inset-0 pointer-events-none">
+    <div className="absolute top-1/4 -left-40 w-96 h-96 bg-primary-500/10 rounded-full blur-[120px]" />
+    <div className="absolute bottom-1/4 -right-40 w-96 h-96 bg-accent-500/10 rounded-full blur-[120px]" />
+  </div>
+
+  <div className="container-custom relative z-10">
+
+    {/* Section Heading */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+      viewport={{ once: true }}
+      className="text-center max-w-3xl mx-auto mb-16"
+    >
+      <span className="text-sm font-medium text-accent-400 uppercase tracking-wider">
+        Why EvolTechs
+      </span>
+
+      <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-5">
+        Technology That Moves Your
+        <span className="gradient-text"> Business Forward</span>
+      </h2>
+
+      <p className="text-gray-400 text-lg leading-relaxed">
+        We combine engineering expertise, reliable infrastructure, and
+        business-focused thinking to create technology that works for your
+        goals — not just technology that looks impressive.
+      </p>
+    </motion.div>
+
+    {/* Value Cards */}
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+      {[
+        {
+          icon: FiZap,
+          number: '01',
+          title: 'Built for Performance',
+          description:
+            'Fast, reliable digital products engineered to perform smoothly as your users and business grow.',
+        },
+        {
+          icon: FiLayers,
+          number: '02',
+          title: 'One Technology Partner',
+          description:
+            'From domains and hosting to custom software and cloud infrastructure, everything can work together under one roof.',
+        },
+        {
+          icon: FiTrendingUp,
+          number: '03',
+          title: 'Designed to Scale',
+          description:
+            'We build with your future in mind, making it easier to expand, improve, and grow without rebuilding everything.',
+        },
+        {
+          icon: FiHeadphones,
+          number: '04',
+          title: 'Human Support',
+          description:
+            'You get real technical support from people who understand your systems, your goals, and your business.',
+        },
+      ].map((item, index) => (
+        <motion.div
+          key={item.number}
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            delay: index * 0.1,
+          }}
+          viewport={{ once: true }}
+          className="group relative p-6 rounded-2xl border border-white/10 bg-white/[0.03] hover:bg-white/[0.06] transition-all duration-500"
+        >
+
+          {/* Number */}
+          <div className="flex items-center justify-between mb-8">
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-primary-500/20 to-accent-500/20 border border-white/10 flex items-center justify-center">
+              <item.icon className="w-6 h-6 text-accent-400" />
+            </div>
+
+            <span className="text-sm font-bold text-white/20 group-hover:text-accent-400/50 transition-colors">
+              {item.number}
+            </span>
+          </div>
+
+          <h3 className="text-xl font-bold text-white mb-3 group-hover:text-accent-400 transition-colors">
+            {item.title}
+          </h3>
+
+          <p className="text-gray-400 leading-relaxed text-sm">
+            {item.description}
+          </p>
+
+          {/* Bottom accent */}
+          <div className="absolute bottom-0 left-6 right-6 h-px bg-gradient-to-r from-transparent via-accent-400/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+        </motion.div>
+      ))}
+
+    </div>
+
+    {/* Bottom Statement */}
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6, delay: 0.3 }}
+      viewport={{ once: true }}
+      className="mt-14 flex flex-col md:flex-row items-center justify-center gap-4 text-center"
+    >
+      <div className="flex items-center gap-2 text-gray-300">
+        <FiCheckCircle className="text-accent-400 w-5 h-5" />
+        <span>Built around your goals</span>
+      </div>
+
+      <span className="hidden md:block text-gray-600">•</span>
+
+      <div className="flex items-center gap-2 text-gray-300">
+        <FiCheckCircle className="text-accent-400 w-5 h-5" />
+        <span>Designed for long-term growth</span>
+      </div>
+
+      <span className="hidden md:block text-gray-600">•</span>
+
+      <div className="flex items-center gap-2 text-gray-300">
+        <FiCheckCircle className="text-accent-400 w-5 h-5" />
+        <span>Supported by real people</span>
+      </div>
+    </motion.div>
+
+  </div>
+</section>
+
+
+      {/* From Idea to Impact Section */}
+      <section className="py-24 relative overflow-hidden bg-[#0a0a0a]">
+        {/* Background Atmosphere */}
+        <div className="absolute inset-0 pointer-events-none">
+          <div className="absolute top-1/3 left-0 w-96 h-96 bg-primary-500/10 rounded-full blur-[140px]" />
+          <div className="absolute bottom-0 right-0 w-96 h-96 bg-accent-500/10 rounded-full blur-[140px]" />
+        </div>
+
+        <div className="container-custom relative z-10">
+
+          {/* Section Heading */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            viewport={{ once: true }}
+            className="text-center max-w-3xl mx-auto mb-16"
+          >
+            <span className="text-sm font-medium text-accent-400 uppercase tracking-wider">
+              How We Work
+            </span>
+
+            <h2 className="text-3xl md:text-5xl font-bold mt-3 mb-5">
+              Great Digital Products
+              <br />
+              <span className="gradient-text">Don't Happen by Accident</span>
+            </h2>
+
+            <p className="text-gray-400 text-lg leading-relaxed">
+              Whether you are starting with an idea, launching a business,
+              or scaling an existing operation, we turn complexity into
+              technology that works for you.
+            </p>
+          </motion.div>
+
+          {/* Journey */}
+          <div className="relative">
+
+            {/* Connecting Line - Desktop */}
+            <div className="hidden lg:block absolute top-[72px] left-[12%] right-[12%] h-px bg-gradient-to-r from-primary-500/10 via-accent-400/50 to-primary-500/10" />
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+
+              {/* Step 1 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="relative z-10 w-16 h-16 mx-auto mb-7 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center group-hover:border-accent-400/50 transition-all duration-300">
+                  <div className="absolute inset-0 rounded-2xl bg-primary-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <FiSun className="relative z-10 w-7 h-7 text-accent-400" />
+                </div>
+
+                <div className="text-center">
+                  <span className="text-xs font-bold text-accent-400 tracking-widest">
+                    01
+                  </span>
+
+                  <h3 className="text-xl font-bold text-white mt-2 mb-3">
+                    Understand
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    We start by understanding your goals, your challenges,
+                    and what success looks like for your business.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Step 2 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.1 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="relative z-10 w-16 h-16 mx-auto mb-7 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center group-hover:border-accent-400/50 transition-all duration-300">
+                  <div className="absolute inset-0 rounded-2xl bg-primary-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <FiLayers className="relative z-10 w-7 h-7 text-accent-400" />
+                </div>
+
+                <div className="text-center">
+                  <span className="text-xs font-bold text-accent-400 tracking-widest">
+                    02
+                  </span>
+
+                  <h3 className="text-xl font-bold text-white mt-2 mb-3">
+                    Design
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    We create a clear strategy and design the right digital
+                    solution around your users and your objectives.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Step 3 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="relative z-10 w-16 h-16 mx-auto mb-7 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center group-hover:border-accent-400/50 transition-all duration-300">
+                  <div className="absolute inset-0 rounded-2xl bg-primary-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <FiZap className="relative z-10 w-7 h-7 text-accent-400" />
+                </div>
+
+                <div className="text-center">
+                  <span className="text-xs font-bold text-accent-400 tracking-widest">
+                    03
+                  </span>
+
+                  <h3 className="text-xl font-bold text-white mt-2 mb-3">
+                    Build
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    Our engineers turn the strategy into reliable software,
+                    infrastructure, websites, and digital experiences.
+                  </p>
+                </div>
+              </motion.div>
+
+              {/* Step 4 */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.3 }}
+                viewport={{ once: true }}
+                className="relative group"
+              >
+                <div className="relative z-10 w-16 h-16 mx-auto mb-7 rounded-2xl bg-[#0a0a0a] border border-white/10 flex items-center justify-center group-hover:border-accent-400/50 transition-all duration-300">
+                  <div className="absolute inset-0 rounded-2xl bg-primary-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity" />
+                  <FiTrendingUp className="relative z-10 w-7 h-7 text-accent-400" />
+                </div>
+
+                <div className="text-center">
+                  <span className="text-xs font-bold text-accent-400 tracking-widest">
+                    04
+                  </span>
+
+                  <h3 className="text-xl font-bold text-white mt-2 mb-3">
+                    Evolve
+                  </h3>
+
+                  <p className="text-gray-400 text-sm leading-relaxed">
+                    We help you improve, scale, and keep moving as your
+                    business and technology continue to grow.
+                  </p>
+                </div>
+              </motion.div>
+
+            </div>
+          </div>
+
+          {/* Bottom Statement */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            viewport={{ once: true }}
+            className="mt-16 pt-8 border-t border-white/5 flex flex-col md:flex-row items-center justify-between gap-6"
+          >
+            <div className="flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-accent-400/10 flex items-center justify-center">
+                <FiCheckCircle className="w-5 h-5 text-accent-400" />
+              </div>
+
+              <div>
+                <p className="text-white font-semibold">
+                  Technology with purpose
+                </p>
+
+                <p className="text-gray-500 text-sm">
+                  Built around your goals, not just the latest trend.
+                </p>
+              </div>
+            </div>
+
+            <Link
+              to="/contact"
+              className="inline-flex items-center gap-2 text-accent-400 hover:text-white font-semibold transition-colors group"
+            >
+              Let's build something meaningful
+              <FiArrowRight className="group-hover:translate-x-1 transition-transform" />
+            </Link>
+          </motion.div>
+
         </div>
       </section>
 

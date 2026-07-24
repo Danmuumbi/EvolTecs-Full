@@ -2,6 +2,8 @@ import { useState, useEffect } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext/useAuth';
 import { useTheme } from '../../context/ThemeContext/ThemeProvider';
+import { useCart } from '../../context/CartContext/CartProvider';
+
 import { 
   FiMenu, 
   FiX, 
@@ -15,9 +17,8 @@ import {
   FiGlobe,
   FiCode,
   FiMail,
-  // FiInfo,
   FiPhone,
-  // FiSearch
+  FiShoppingCart
 } from 'react-icons/fi';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -27,6 +28,7 @@ export const Header = () => {
   const [isServicesOpen, setIsServicesOpen] = useState(false);
   const { user, logout } = useAuth();
   const { theme, toggleTheme } = useTheme();
+  const { totalItems, toggleCart } = useCart();
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -43,7 +45,6 @@ export const Header = () => {
     { name: 'Services', href: '/services', icon: FiCode, hasDropdown: true },
     { name: 'Hosting', href: '/hosting', icon: FiServer },
     { name: 'Domains', href: '/domains', icon: FiGlobe },
-    // { name: 'About', href: '/about', icon: FiInfo },
     { name: 'Support', href: '/contact', icon: FiPhone },
   ];
 
@@ -84,7 +85,7 @@ export const Header = () => {
               <span className="text-white font-bold text-2xl">E</span>
             </motion.div>
             <div className="hidden sm:block">
-              <span className="text-2xl font-bold gradient-text">EvolTech</span>
+              <span className="text-2xl font-bold gradient-text">EvolTechs</span>
               <span className="block text-[10px] text-gray-400 tracking-widest uppercase">Digital Solutions</span>
             </div>
           </Link>
@@ -150,8 +151,24 @@ export const Header = () => {
             ))}
           </nav>
 
-          {/* Right side - Auth buttons & Theme toggle */}
+          {/* Right side - Cart, Theme toggle & Auth buttons */}
           <div className="flex items-center space-x-3">
+            {/* Cart Button - ALWAYS VISIBLE */}
+            <motion.button
+              whileHover={{ scale: 1.1 }}
+              whileTap={{ scale: 0.95 }}
+              onClick={toggleCart}
+              className="p-2.5 rounded-lg bg-white/5 hover:bg-white/10 transition-all duration-200 border border-white/10 relative"
+              aria-label="Open cart"
+            >
+              <FiShoppingCart className="w-5 h-5 text-gray-300" />
+              {totalItems > 0 && (
+                <span className="absolute -top-1 -right-1 w-5 h-5 bg-accent-500 text-white text-[10px] font-bold rounded-full flex items-center justify-center">
+                  {totalItems}
+                </span>
+              )}
+            </motion.button>
+
             {/* Theme Toggle - Always visible */}
             <motion.button
               whileHover={{ scale: 1.1 }}
@@ -167,7 +184,7 @@ export const Header = () => {
               )}
             </motion.button>
 
-            {/* Desktop Auth */}
+            {/* Desktop Auth - Only visible when logged in/out */}
             <div className="hidden md:flex items-center space-x-3">
               {user ? (
                 <>
