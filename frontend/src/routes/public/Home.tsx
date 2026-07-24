@@ -194,7 +194,7 @@ export const Home = () => {
         description="EvolTechs Software Solutions provides domain registration, web hosting, business email, custom software development, cloud solutions, cloud infrastructure, cybersecurity and AI solutions."
         canonical="https://evoltecs.com/"
       />
-      
+
       {/* Video Hero Section */}
       <section ref={targetRef} className="relative min-h-screen flex items-center justify-center overflow-hidden">
         {/* Video Background */}
@@ -231,9 +231,9 @@ export const Home = () => {
             transition={{ duration: 0.8 }}
           >
             <h1 className="text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
-              <span className="text-white">Transform Your</span>
+              <span className="text-white">Build Digital</span>
               <br />
-              <span className="gradient-text">Digital Vision</span>
+              <span className="gradient-text">Scale & Thrive</span>
             </h1>
             
             <p className="text-lg md:text-xl text-gray-300 max-w-3xl mx-auto mb-10 leading-relaxed">
