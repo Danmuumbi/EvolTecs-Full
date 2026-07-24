@@ -1,26 +1,26 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import {
-  FiMail,
+  // FiMail,
   FiTwitter,
   FiLinkedin,
   FiGithub,
   FiYoutube,
   FiArrowUp,
-  FiHeart,
+  // FiHeart,
   FiGlobe,
-  FiCode,
-  FiServer,
+  // FiCode,
+  // FiServer,
   FiShield,
-  FiCloud,
-  FiSmartphone,
+  // FiCloud,
+  // FiSmartphone,
   FiAward,
 } from 'react-icons/fi';
 import { useState, useEffect } from 'react';
 
 export const Footer = () => {
-  const [email, setEmail] = useState('');
-  const [isSubmitted, setIsSubmitted] = useState(false);
+  // const [email, setEmail] = useState('');
+  // const [isSubmitted, setIsSubmitted] = useState(false);
   const [showScrollTop, setShowScrollTop] = useState(false);
 
   const currentYear = new Date().getFullYear();
@@ -42,18 +42,18 @@ export const Footer = () => {
     });
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+  // const handleSubmit = (e: React.FormEvent) => {
+  //   e.preventDefault();
 
-    if (!email.trim()) return;
+  //   if (!email.trim()) return;
 
-    setIsSubmitted(true);
-    setEmail('');
+  //   setIsSubmitted(true);
+  //   setEmail('');
 
-    setTimeout(() => {
-      setIsSubmitted(false);
-    }, 3000);
-  };
+  //   setTimeout(() => {
+  //     setIsSubmitted(false);
+  //   }, 3000);
+  // };
 
   const footerLinks = {
     Solutions: [
